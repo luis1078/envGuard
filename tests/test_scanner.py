@@ -23,7 +23,11 @@ def test_flags_private_key_block():
 
 
 def test_generic_assignment_rule_catches_unknown_secret_shape():
-    findings = scan_text("STRIPE_WEBHOOK_SECRET=whsec_verylongrandomlookingvalue123\n")
+    # Deliberately NOT shaped like a real Stripe webhook secret (no "whsec_"
+    # prefix) so this fixture isn't flagged by GitHub secret scanning - it
+    # only needs to exercise the generic fallback rule, not any
+    # brand-specific pattern.
+    findings = scan_text("STRIPE_WEBHOOK_SECRET=not-a-real-secret-fixture-9f8e7d6c5b4a\n")
     assert any(f.rule == "Possible credential in assignment" for f in findings)
 
 
