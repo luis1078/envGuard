@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "envguard"
+version = "0.1.0"
+description = "Catch missing .env variables and leaked secrets before they're committed"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+envguard = "envguard.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
